@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+// Declaring Class BankAccount
 class BankAccount
 {
 public:
@@ -14,6 +15,7 @@ public:
             balance+=amount;
         }
     }
+//Withdraw money Function
     void withdraw(int amount)
     {
         if(amount>0 && amount<balance)
@@ -25,6 +27,7 @@ public:
             cout<<"Not enough balance!"<<endl;
         }
     }
+// Display Account Cureent Balance
     void display_balance()
     {
         cout<<"Current Balance: "<<balance;
@@ -33,11 +36,13 @@ public:
 
 int main()
 {
+    // Declaring Firsr Bank Account
     BankAccount B1;
     B1.balance=10000;
     int amount;
     int choice;
 
+    //Talking input of bank account detail
     cout<<"Enter your name: ";
     cin>>B1.HolderName;
     cout<<"Enter your account number: ";
@@ -73,6 +78,6 @@ int main()
     }
     while(choice!=4);
 
-    cout<<"\nName: Anshkumar Darji"<<endl<<"ID: 24CE022";
+    cout<<"\nName: Vedant Bhatt"<<endl<<"ID: 24CE0013";
     return 0;
 }
