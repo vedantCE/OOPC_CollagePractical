@@ -1,83 +1,100 @@
+/*
+==============================================
+    PROGRAM: VMart Billing System
+    AIM: To manage a simple product billing system
+    DEVELOPER: Vedant Bhatt
+    CREATED ON: February 21,2025
+    LAST UPDATED: March 12, 2025
+==============================================
+*/
+
 #include <iostream>
 #include <iomanip>  // For use of setw
-#include <conio.h> // For using of clear screen 
+#include <conio.h>  // For using clear screen
 using namespace std;
 
+// Product class to store product details
 class Product
 {
-    int pid;
-    string pname;
-    int pprice;
-    int totalPrice;
+    int product_id;
+    string product_name;
+    int product_price;
+    int total_price;
     int quantity;
 
 public:
-    void displayDetail()
+    // Function to display product details in bill format
+    void display_detail()
     {
-        cout << left << setw(15) << pname 
-     << right << setw(10) << pprice 
-     << setw(10) << quantity 
-     << setw(15) << totalPrice << endl;
-
+        cout << left << setw(15) << product_name 
+             << right << setw(10) << product_price 
+             << setw(10) << quantity 
+             << setw(15) << total_price << endl;
     }
 
-    int searchProduct(int id)
+    // Function to check if product ID matches
+    int search_product(int id)
     {
-        return (id == pid);
+        if (id == product_id)
+            return 1;
+        return 0;
     }
 
-    void addQuantity()
+    // Function to add quantity to an existing product
+    void add_quantity()
     {
         quantity++;
-        totalPrice = pprice * quantity;
-        cout << "Product ID " << pid << " found! Added to your basket. New quantity: " << quantity << "  Total Price: " << totalPrice << endl;
+        total_price = product_price * quantity;
+        cout << "Product ID " << product_id << " found! Added to your basket. New quantity: " 
+             << quantity << "  Total Price: " << total_price << endl;
     }
 
-    void addProduct(int id)
+    // Function to add a new product
+    void add_product(int id)
     {
         cout << "New Product Found!!" << endl
              << "Enter product name: ";
-        cin >> pname;
+        cin >> product_name;
         cout << "Enter product price: ";
-        cin >> pprice;
-        pid = id;
+        cin >> product_price;
+        product_id = id;
         quantity = 1;
-        totalPrice = pprice;
+        total_price = product_price;
     }
 
-    int getTotalPrice()
+    // Function to get the total price of a product
+    int get_total_price()
     {
-        return totalPrice;
+        return total_price;
     }
 };
 
+// Main Function
 int main()
 {
-    Product p[50];
-    int noOfProduct = 0, id, grandTotal = 0;
+    Product product_list[50];
+    int num_products = 0, product_id, grand_total = 0;
     char choice;
 
 menu:
-    cout << "Enter product id: ";
-    cin >> id;
-    bool found = false;
+    cout << "Enter product ID: ";
+    cin >> product_id;
 
-    for (int i = 0; i < noOfProduct; i++)
+    // Searching for existing product
+    for (int i = 0; i < num_products; i++)
     {
-        if (p[i].searchProduct(id))
+        if (product_list[i].search_product(product_id) == 1)
         {
-            p[i].addQuantity();
-            found = true;
-            break;
+            product_list[i].add_quantity();
+            goto continue_shopping;
         }
     }
 
-    if (!found)
-    {
-        p[noOfProduct].addProduct(id);
-        noOfProduct++;
-    }
+    // Adding a new product if not found
+    product_list[num_products].add_product(product_id);
+    num_products++;
 
+continue_shopping:
     cout << "If you want to add another item press y else n: ";
     cin >> choice;
     if (choice == 'y')
@@ -87,26 +104,25 @@ menu:
     else
     {
         system("CLS"); // For clearing screen
-        cout<<"|---------------------VMart---------------------------------|"<<endl;
-        cout <<endl<< "Final Bill:"<<endl;
-        cout << "---------------------------------------------------"<<endl;
+        cout << "|--------------------- VMart ---------------------------------|" << endl;
+        cout << endl << "Final Bill:" << endl;
+        cout << "---------------------------------------------------" << endl;
         cout << left << setw(15) << "Name" 
-        << right << setw(10) << "Price" 
-        << setw(10) << "Quantity" 
-        << setw(15) << "Total Price" << endl;
-   
-        cout << "---------------------------------------------------"<<endl;
-        for (int i = 0; i < noOfProduct; i++)
+             << right << setw(10) << "Price" 
+             << setw(10) << "Quantity" 
+             << setw(15) << "Total Price" << endl;
+        cout << "---------------------------------------------------" << endl;
+
+        for (int i = 0; i < num_products; i++)
         {
-
-            p[i].displayDetail();
-            grandTotal += p[i].getTotalPrice();
+            product_list[i].display_detail();
+            grand_total += product_list[i].get_total_price();
         }
-        cout << "---------------------------------------------------"<<endl;
-        cout << left << setw(35) << "Grand Total:" << grandTotal << endl;
-        cout<<endl<<"          --x--Thanks For Visiting--x--         "<<endl;
-        cout<<endl<<"Vedant_Bhatt"<<" "<<"ID No:24CE013"<<endl;
 
+        cout << "---------------------------------------------------" << endl;
+        cout << left << setw(35) << "Grand Total:" << grand_total << endl;
+        cout << endl << "          --x-- Thanks For Visiting --x--         " << endl;
+        cout << endl << "Vedant Bhatt" << " " << "ID No: 24CE013" << endl;
     }
     return 0;
 }
