@@ -1,54 +1,75 @@
-#include <iostream>
-#include <iomanip>
-#include<conio.h>
-using namespace std;
-#define MAX_ACCOUNT 50
+/* 
+===========================================================================
+    PROGRAM: Bank Management System - SAHARA BANK
+    DEVELOPER: Vedant Bhatt
+    ID No: 24CE013
+    CREATED ON:  February 21,2025
+    LAST UPDATE: March 13, 2025
 
+    Updates:
+    - [13-03-2025] Implemented do-while loop instead of goto for better flow.
+    - [13-03-2025] Implemented const insted of #define for type saftey
+=============================================================================
+*/
+
+#include <iostream>
+#include <iomanip> // for setw
+#include <conio.h> // for clear screen
+
+using namespace std;
+
+const int MAX_ACCOUNT = 50; // Maximum number of accounts
+
+// Class to store Bank Account details
 class BankAccount {
-    string AccountHolder;
-    int UniqueAccountNumber;
-    float CurrentBalance;
-    int AccountType; // 1 = Saving, 2 = Business
+    string AccountHolder;     
+    int UniqueAccountNumber;  
+    float CurrentBalance;     
+    int AccountType;          // 1 = Savings, 2 = Business
 
 public:
-void displayDetail() {
-    cout << "| " << left << setw(20) << AccountHolder 
-         << "| " << right << setw(15) << UniqueAccountNumber
-         << "| " << setw(15) << CurrentBalance << " |" << endl;
-}
+    // Function to display account details in tabular format
+    void DisplayDetail() {
+        cout << "| " << left << setw(20) << AccountHolder 
+             << "| " << right << setw(15) << UniqueAccountNumber
+             << "| " << setw(15) << CurrentBalance << " |" << endl;
+    }
 
-    int AddNewAccount() {
-        system("CLS"); // For clearing screen
-        cout << "Hello New User" << endl;
+    // Function to create a new bank account
+    void AddNewAccount() {
+        system("CLS"); // Clear screen
+        cout << "||-------------- Welcome New User --------------||" << endl;
         cout << "Enter account holder name: ";
         cin >> AccountHolder;
-        cout << endl << "Enter your unique account number: ";
+        cout << "Enter your unique account number: ";
         cin >> UniqueAccountNumber;
-        cout << "There are two (2) types of Bank Accounts available in our bank." << endl
-             << "Which type of Bank Account do you want to open?" << endl
-             << "1. Saving Account (no initial deposit required)" << endl
-             << "2. Business Account (initial Rs. 5000 deposit required)" << endl;
-        cout << "Enter your choice here: ";
+
+        // Selecting account type
+        cout << "Types of Bank Accounts Available:\n"
+             << "1. Savings Account (no initial deposit required)\n"
+             << "2. Business Account (minimum Rs. 5000 balance required)\n"
+             << "Enter your choice: ";
         cin >> AccountType;
 
         if (AccountType == 1) {
-            cout << "Congratulations " << AccountHolder << "! You opened a Saving Account." << endl;
+            cout << "Congratulations " << AccountHolder << "! You opened a Savings Account." << endl;
             CurrentBalance = 0;
         } else {
             cout << "Congratulations " << AccountHolder << "! You opened a Business Account." << endl;
             CurrentBalance = 5000;
         }
-        return AccountType;
     }
 
-    int SearchAccount(int Id) {
+    // Function to search an account by ID
+    bool SearchAccount(int Id) {
         return (Id == UniqueAccountNumber);
     }
 
+    // Function to withdraw money
     void WithdrawMoney() {
         system("CLS"); // Clear screen
         int Money;
-        cout << "|------- Withdraw Money System -------|" << endl;
+        cout << "||------- Withdraw Money -------||" << endl;
         cout << "Enter the amount to withdraw: ";
         cin >> Money;
 
@@ -69,91 +90,88 @@ void displayDetail() {
         }
     }
 
+    // Function to deposit money
     void DepositMoney() {
         system("CLS"); // Clear screen
-        int Money2;
-        cout << "|------- Deposit Money System -------|" << endl;
+        int Money;
+        cout << "||------- Deposit Money -------||" << endl;
         cout << "Enter the amount to deposit: ";
-        cin >> Money2;
-        CurrentBalance += Money2;
+        cin >> Money;
+        CurrentBalance += Money;
         cout << "Your current balance is: " << CurrentBalance << endl;
     }
 };
 
 int main() {
-    int NoOfAccount = 0;
-    BankAccount account[MAX_ACCOUNT];
+    int NoOfAccount = 0; // Total number of accounts created
+    BankAccount account[MAX_ACCOUNT]; // Array to store multiple accounts
     int BankAccountNumber;
-
-
-menu:
-
-    cout << "||------------- Welcome to SAHARA Bank -----------||" << endl;
-    cout << "Press: " << endl
-         << "1. New account" << endl
-         << "2. Withdraw money" << endl
-         << "3. Deposit money" << endl
-         << "4. Display Full Details" << endl
-         << "5. Exit" << endl;
     int choice;
-    cout << endl << "Enter your choice: ";
-    cin >> choice;
 
-    switch (choice) {
-    case 1:
-        if (NoOfAccount < MAX_ACCOUNT) {
-            account[NoOfAccount].AddNewAccount();
-            NoOfAccount++;
-        }
-        break;
+    do {
+        // Display menu options
+        cout << "\n||------------- Welcome to SAHARA Bank -----------||" << endl;
+        cout << "1. New account" << endl;
+        cout << "2. Withdraw money" << endl;
+        cout << "3. Deposit money" << endl;
+        cout << "4. Display all account details" << endl;
+        cout << "5. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
 
-    case 2:
-        cout << "Enter your Bank Account number: ";
-        cin >> BankAccountNumber;
-        for (int i = 0; i < NoOfAccount; i++) {
-            if (account[i].SearchAccount(BankAccountNumber)) {
-                account[i].WithdrawMoney();
+        switch (choice) {
+            case 1:
+                if (NoOfAccount < MAX_ACCOUNT) {
+                    account[NoOfAccount].AddNewAccount();
+                    NoOfAccount++;
+                } else {
+                    cout << "Maximum account limit reached!" << endl;
+                }
                 break;
-            }
-        }
-        break;
 
-    case 3:
-        cout << "Enter your Bank Account number: ";
-        cin >> BankAccountNumber;
-        for (int i = 0; i < NoOfAccount; i++) {
-            if (account[i].SearchAccount(BankAccountNumber)) {
-                account[i].DepositMoney();
+            case 2:
+                cout << "Enter your Bank Account number: ";
+                cin >> BankAccountNumber;
+                for (int i = 0; i < NoOfAccount; i++) {
+                    if (account[i].SearchAccount(BankAccountNumber)) {
+                        account[i].WithdrawMoney();
+                        break;
+                    }
+                }
                 break;
-            }
+
+            case 3:
+                cout << "Enter your Bank Account number: ";
+                cin >> BankAccountNumber;
+                for (int i = 0; i < NoOfAccount; i++) {
+                    if (account[i].SearchAccount(BankAccountNumber)) {
+                        account[i].DepositMoney();
+                        break;
+                    }
+                }
+                break;
+
+            case 4:
+                system("CLS"); // Clear screen
+                cout << "\n||----------- SAHARA BANK Account Details -----------||" << endl;
+                cout << "==========================================================" << endl;
+                cout << "| Account Holder Name  | Account Number  | Current Balance  |" << endl;
+                cout << "==========================================================" << endl;
+            
+                for (int i = 0; i < NoOfAccount; i++) {
+                    account[i].DisplayDetail();
+                }
+                cout << "--------------------------------------------------------" << endl;
+                break;
+
+            case 5:
+                cout << "Thank you for using SAHARA Bank system. Have a great day!" << endl;
+                break;
+
+            default:
+                cout << "Invalid choice! Please enter a valid option." << endl;
         }
-        break;
+    } while (choice != 5); // Loop until the user selects Exit (5)
 
-    case 4:
-        system("CLS"); // For clearing screen
-        cout << "|-------------------- SAHARA BANK --------------------|" << endl;
-        cout << "|-------- BHAVNAGAR, SARDARNAGAR BRANCH, 364002 --------|" << endl;
-        cout << "|------------- Bank Account Holder Details ------------|" << endl;
-        cout <<endl<< "==============================================================="<<endl;
-            cout << "| Account Holder Name  | Account Number  | Current Balance  |"<<endl;
-            cout << "==============================================================="<<endl;
-      
-        for (int i = 0; i < NoOfAccount; i++) {
-            account[i].displayDetail();
-        }
-        cout << "--------------------------------------------------------" << endl;
-        cout<<endl<<"Vedant_Bhatt"<<" "<<"ID No:24CE013"<<endl;
-        system("pause");
-        break;
-
-    case 5:
-        exit(0);
-
-    default:
-        cout << "Enter a valid choice" << endl;
-        break;
-    }
-
-    goto menu;
     return 0;
 }
