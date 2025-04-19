@@ -4,6 +4,7 @@
     DEVELOPER: VEDANT BHATT
     ID No: 24CE013
     CREATED ON: April 11, 2025
+    LAST UPDATE ON: April 19,2025
 
     DESCRIPTION:
     A system to manage student academic records including roll number, name, 
@@ -17,82 +18,81 @@
 #include <string>
 using namespace std;
 
-
 class Student {
 private:
-    int rollNumber;
-    string name;
-    int marks[3];
-    float average;
+    int RollNumber;
+    string Name;
+    int Marks[3];
+    float Average;
 
 public:
     // Initializes student with default or given values
-    void initialize(string studentName = "Unknown", int roll = 0, int m1 = 0, int m2 = 0, int m3 = 0) {
-        name = studentName;
-        rollNumber = roll;
-        marks[0] = m1;
-        marks[1] = m2;
-        marks[2] = m3;
-        calculateAverage();
+    void Initialize(string StudentName = "Unknown", int Roll = 0, int M1 = 0, int M2 = 0, int M3 = 0) {
+        Name = StudentName;
+        RollNumber = Roll;
+        Marks[0] = M1;
+        Marks[1] = M2;
+        Marks[2] = M3;
+        CalculateAverage();
     }
 
     // Calculates the average marks
-    void calculateAverage() {
-        int total = marks[0] + marks[1] + marks[2];
-        average = static_cast<float>(total) / 3.0;
+    void CalculateAverage() {
+        int Total = Marks[0] + Marks[1] + Marks[2];
+        Average = static_cast<float>(Total) / 3.0;
     }
 
     // Displays student details
-    void display(int index) const {
+    void Display(int Index) const {
         cout << endl;
-        cout << "Student Details for Student " << index + 1 << ":" << endl;
-        cout << left << setw(20) << "Name:" << name << endl;
-        cout << left << setw(20) << "Roll Number:" << rollNumber << endl;
-        cout << left << setw(20) << "Marks (Subject 1):" << marks[0] << endl;
-        cout << left << setw(20) << "Marks (Subject 2):" << marks[1] << endl;
-        cout << left << setw(20) << "Marks (Subject 3):" << marks[2] << endl;
-        cout << left << setw(20) << fixed << setprecision(2) << "Average:" << average << endl;
+        cout << "Student Details for Student " << Index + 1 << ":" << endl;
+        cout << left << setw(20) << "Name:" << Name << endl;
+        cout << left << setw(20) << "Roll Number:" << RollNumber << endl;
+        cout << left << setw(20) << "Marks (Subject 1):" << Marks[0] << endl;
+        cout << left << setw(20) << "Marks (Subject 2):" << Marks[1] << endl;
+        cout << left << setw(20) << "Marks (Subject 3):" << Marks[2] << endl;
+        cout << left << setw(20) << fixed << setprecision(2) << "Average:" << Average << endl;
     }
 };
 
 int main() {
-    int numStudents;
+    int NumStudents;
     cout << "Enter the number of students: ";
-    cin >> numStudents;
+    cin >> NumStudents;
     cin.ignore(); // Clear the newline character from input buffer
 
-    Student students[numStudents];
+    Student Students[NumStudents];
 
     // Input phase
-    for (int i = 0; i < numStudents; ++i) {
-        string name;
-        int roll, m1, m2, m3;
+    for (int I = 0; I < NumStudents; ++I) {
+        string Name;
+        int Roll, M1, M2, M3;
 
-        cout << endl << "Enter details for student " << i + 1 << ":" << endl;
+        cout << endl << "Enter details for student " << I + 1 << ":" << endl;
 
         cout << "Name: ";
-        getline(cin, name); // Allows full name with spaces
+        getline(cin, Name); // Allows full name with spaces
 
         cout << "Roll Number: ";
-        cin >> roll;
+        cin >> Roll;
 
         cout << "Marks in Subject 1: ";
-        cin >> m1;
+        cin >> M1;
 
         cout << "Marks in Subject 2: ";
-        cin >> m2;
+        cin >> M2;
 
         cout << "Marks in Subject 3: ";
-        cin >> m3;
+        cin >> M3;
         cin.ignore(); 
 
-        students[i].initialize(name, roll, m1, m2, m3);
+        Students[I].Initialize(Name, Roll, M1, M2, M3);
     }
 
     // Output phase
     cout << endl << "=========================== Student Records =========================" << endl;
-    for (int i = 0; i < numStudents; ++i) {
-        students[i].display(i);
+    for (int I = 0; I < NumStudents; ++I) {
+        Students[I].Display(I);
     }
 
     cout << endl << "VEDANT BHATT || 24CE013" << endl;
