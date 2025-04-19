@@ -19,117 +19,116 @@ using namespace std;
 // Employee class to store employee details
 class Employee
 {
-    string name;
-    int basicSalary;
-    int bonusAmount;
+    string Name;
+    int BasicSalary;
+    int BonusAmount;
 
 public:
-    Employee *nextEmployee; // Pointer to next employee
+    Employee *NextEmployee; // Pointer to next employee
 
     // Constructor to initialize employee details
-    Employee(string name, int basicSalary, int bonusAmount = 0)
+    Employee(string Name, int BasicSalary, int BonusAmount = 0)
     {
-        this->name = name;
-        this->basicSalary = basicSalary;
-        this->bonusAmount = bonusAmount;
-        nextEmployee = NULL;
+        this->Name = Name;
+        this->BasicSalary = BasicSalary;
+        this->BonusAmount = BonusAmount;
+        NextEmployee = NULL;
     }
 
     // Function to calculate total salary
-    int totalSalary(int basicSalary, int bonusAmount)
+    int TotalSalary(int BasicSalary, int BonusAmount)
     {
-        return basicSalary + bonusAmount;
+        return BasicSalary + BonusAmount;
     }
 
     // Function to display employee data in tabular format
-    void display()
+    void Display()
     {
-        cout << left << setw(20) << name
-             << setw(15) << basicSalary
-             << setw(15) << bonusAmount
-             << setw(15) << totalSalary(basicSalary, bonusAmount)
+        cout << left << setw(20) << Name
+             << setw(15) << BasicSalary
+             << setw(15) << BonusAmount
+             << setw(15) << TotalSalary(BasicSalary, BonusAmount)
              << endl;
     }
 };
 
 int main()
 {
-    Employee *firstEmployee = NULL;
-    Employee *currentEmployee, *lastEmployee;
-    int choice, basicSalary, bonusAmount;
-    string name;
-    char choice2;
+    Employee *FirstEmployee = NULL;
+    Employee *CurrentEmployee, *LastEmployee;
+    int Choice, BasicSalary, BonusAmount;
+    string Name;
+    char Choice2;
 
-n: // Main menu label
+N: // Main menu label
     cout << endl
          << "Press" << endl
          << "1. Add Employee" << endl
          << "2. Display Employees" << endl
          << "0. Exit" << endl;
     cout << "Enter your choice: ";
-    cin >> choice;
+    cin >> Choice;
 
-    switch (choice)
+    switch (Choice)
     {
     case 0: // Exit
         cout << "VEDANT BHATT || 24CE013 " << endl;
-        goto e;
+        goto E;
 
     case 1: // Add new employee
         cout << "Enter Name, Basic Salary: ";
-        cin >> name >> basicSalary;
+        cin >> Name >> BasicSalary;
 
-        if (firstEmployee == NULL)
+        if (FirstEmployee == NULL)
         {
             // First employee creation
             cout << "Is employee eligbile for bomus(y/n)?";
-            cin >> choice2;
-            if (choice2 == 'y')
+            cin >> Choice2;
+            if (Choice2 == 'y')
             {
                 cout << "Enter bonus amount:";
-                cin >> bonusAmount;
-                firstEmployee = new Employee(name, basicSalary, bonusAmount);
+                cin >> BonusAmount;
+                FirstEmployee = new Employee(Name, BasicSalary, BonusAmount);
             }
             else
             {
-                firstEmployee = new Employee(name, basicSalary);
+                FirstEmployee = new Employee(Name, BasicSalary);
             }
         }
         else
         {
             // Add new employee to the end of the list
-            currentEmployee = firstEmployee;
-            while (currentEmployee->nextEmployee != NULL)
+            CurrentEmployee = FirstEmployee;
+            while (CurrentEmployee->NextEmployee != NULL)
             {
-                currentEmployee = currentEmployee->nextEmployee;
+                CurrentEmployee = CurrentEmployee->NextEmployee;
             }
             cout << "Is employee eligbile for bomus(y/n)?";
-            cin >> choice2;
-            if (choice2 == 'y')
+            cin >> Choice2;
+            if (Choice2 == 'y')
             {
                 cout << "Enter bonus amount:";
-                cin >> bonusAmount;
-                lastEmployee = new Employee(name, basicSalary, bonusAmount);
+                cin >> BonusAmount;
+                LastEmployee = new Employee(Name, BasicSalary, BonusAmount);
             }
             else
             {
-                lastEmployee = new Employee(name, basicSalary);
+                LastEmployee = new Employee(Name, BasicSalary);
             }
-            currentEmployee->nextEmployee = lastEmployee;
+            CurrentEmployee->NextEmployee = LastEmployee;
         }
-        goto n;
+        goto N;
 
     case 2: // Display all employees
-        if (firstEmployee == NULL)
+        if (FirstEmployee == NULL)
         {
             cout << "No employee records to display.\n";
         }
         else
         {
-            currentEmployee = firstEmployee;
+            CurrentEmployee = FirstEmployee;
 
-            // Print header
-            cout << "\n"
+            cout << endl
                  << left
                  << setw(20) << "Name"
                  << setw(15) << "Basic Salary"
@@ -139,19 +138,19 @@ n: // Main menu label
             cout << string(65, '-') << endl;
 
             // Print employee data
-            while (currentEmployee != NULL)
+            while (CurrentEmployee != NULL)
             {
-                currentEmployee->display();
-                currentEmployee = currentEmployee->nextEmployee;
+                CurrentEmployee->Display();
+                CurrentEmployee = CurrentEmployee->NextEmployee;
             }
         }
-        goto n;
+        goto N;
 
     default:
         cout << "Enter a valid choice (0, 1, or 2)." << endl;
-        goto n;
+        goto N;
     }
 
-e: // Exit label
+E: // Exit label
     return 0;
 }
