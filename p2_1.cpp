@@ -1,55 +1,65 @@
+/*
+==============================================
+    PROGRAM: Simple Reactangle  Management System
+    AIM: To perform basic Rectangle operations like Updat Dimenssion,Calculat Area,Calculate Perimeter,
+         Display Detail.
+    DEVELOPER: Vedant Bhatt
+    LAST UPDATED: April 19, 2025
+==============================================
+*/
+
 #include <iostream>
 #include <iomanip>
 using namespace std;
 
 class Rectangle
 {
-    int length;
-    int breadth;
+    int Length;
+    int Breadth;
 
 public:
-    void displayDetail(int i)
+    void DisplayDetail(int I)
     {
-        cout << left << setw(15) << i + 1
-             << right << setw(10) << length
-             << setw(10) << breadth
-             << setw(15) << (length * breadth)
-             << setw(10) << (2 * (length + breadth)) << endl;
+        cout << left << setw(15) << I + 1
+             << right << setw(10) << Length
+             << setw(10) << Breadth
+             << setw(15) << (Length * Breadth)
+             << setw(10) << (2 * (Length + Breadth)) << endl;
     }
 
-    void perimeter(int i)
+    void Perimeter(int I)
     {
-        cout << "Perimeter of Rectangle " << i + 1 << " is: " << 2 * (length + breadth) << endl;
+        cout << "Perimeter of Rectangle " << I + 1 << " is: " << 2 * (Length + Breadth) << endl;
     }
 
-    void area(int i)
+    void Area(int I)
     {
-        cout << "Area of Rectangle " << i + 1 << " is: " << length * breadth << endl;
+        cout << "Area of Rectangle " << I + 1 << " is: " << Length * Breadth << endl;
     }
 
-    void setdimension()
+    void SetDimension()
     {
         cout << "Enter length and breadth: ";
-        cin >> length >> breadth;
+        cin >> Length >> Breadth;
     }
 
-    void updatDimension(int rlength, int rbreadth)
+    void UpdateDimension(int RLength, int RBreadth)
     {
-        length = rlength;
-        breadth = rbreadth;
+        Length = RLength;
+        Breadth = RBreadth;
     }
 };
 
 int main()
 {
-    int n, choice1, ID, rlength, rbreadth;
-    char choice2;
+    int N, Choice1, Id, RLength, RBreadth;
+    char Choice2;
     cout << "Enter number of rectangles: ";
-    cin >> n;
-    Rectangle dimension[n];
-    int count = 0;
+    cin >> N;
+    Rectangle Dimension[N];
+    int Count = 0;
 
-menu:
+Menu:
     cout << endl;
     cout << "1. Add Rectangle" << endl;
     cout << "2. Update Rectangle Dimensions" << endl;
@@ -58,26 +68,26 @@ menu:
     cout << "5. Display All Rectangle Details" << endl;
     cout << "6. Exit" << endl;
     cout << "Enter your choice: ";
-    cin >> choice1;
+    cin >> Choice1;
     cout << endl;
 
-    switch (choice1)
+    switch (Choice1)
     {
     case 1:
-        if (count < n)
+        if (Count < N)
         {
-        add_rectangle:
-            cout << "Enter dimensions for Rectangle " << count + 1 << ": ";
-            dimension[count].setdimension();
-            count++;
+        AddRectangle:
+            cout << "Enter dimensions for Rectangle " << Count + 1 << ": ";
+            Dimension[Count].SetDimension();
+            Count++;
 
-            if (count < n) 
+            if (Count < N) 
             {
                 cout << "Do you want to add another Rectangle? (y/n): ";
-                cin >> choice2;
-                if (choice2 == 'y')
+                cin >> Choice2;
+                if (Choice2 == 'y')
                 {
-                    goto add_rectangle;
+                    goto AddRectangle;
                 }
             }
         }
@@ -85,19 +95,19 @@ menu:
         {
             cout << "Maximum number of Rectangles added!" << endl;
         }
-        goto menu;
+        goto Menu;
         break;
 
     case 2:
-        if (count > 0)
+        if (Count > 0)
         {
-            cout << "Enter ID of the Rectangle to update (1 to " << count << "): ";
-            cin >> ID;
-            if (ID >= 1 && ID <= count)
+            cout << "Enter ID of the Rectangle to update (1 to " << Count << "): ";
+            cin >> Id;
+            if (Id >= 1 && Id <= Count)
             {
                 cout << "Enter new dimensions (length breadth): ";
-                cin >> rlength >> rbreadth;
-                dimension[ID - 1].updatDimension(rlength, rbreadth);
+                cin >> RLength >> RBreadth;
+                Dimension[Id - 1].UpdateDimension(RLength, RBreadth);
             }
             else
             {
@@ -108,41 +118,41 @@ menu:
         {
             cout << "No Rectangles available to update!" << endl;
         }
-        goto menu;
+        goto Menu;
         break;
 
     case 3:
-        if (count > 0)
+        if (Count > 0)
         {
-            for (int i = 0; i < count; i++)
+            for (int I = 0; I < Count; I++)
             {
-                dimension[i].area(i);
+                Dimension[I].Area(I);
             }
         }
         else
         {
             cout << "No Rectangles available to display area!" << endl;
         }
-        goto menu;
+        goto Menu;
         break;
 
     case 4:
-        if (count > 0)
+        if (Count > 0)
         {
-            for (int i = 0; i < count; i++)
+            for (int I = 0; I < Count; I++)
             {
-                dimension[i].perimeter(i);
+                Dimension[I].Perimeter(I);
             }
         }
         else
         {
             cout << "No Rectangles available to display perimeter!" << endl;
         }
-        goto menu;
+        goto Menu;
         break;
 
     case 5:
-        if (count > 0)
+        if (Count > 0)
         {
             cout << "|--------------------- Rectangle Details ---------------------|" << endl;
             cout << "-------------------------------------------------------------" << endl;
@@ -153,9 +163,9 @@ menu:
                  << setw(10) << "Perimeter" << endl;
             cout << "-------------------------------------------------------------" << endl;
 
-            for (int i = 0; i < count; i++)
+            for (int I = 0; I < Count; I++)
             {
-                dimension[i].displayDetail(i);
+                Dimension[I].DisplayDetail(I);
             }
 
             cout << "-------------------------------------------------------------" << endl;
@@ -166,7 +176,7 @@ menu:
         {
             cout << "No Rectangles available to display details!" << endl;
         }
-        goto menu;
+        goto Menu;
         break;
 
     case 6:
@@ -176,6 +186,6 @@ menu:
 
     default:
         cout << "Invalid choice! Please enter a valid option." << endl;
-        goto menu;
+        goto Menu;
     }
 }
