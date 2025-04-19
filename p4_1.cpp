@@ -1,10 +1,16 @@
 /*
-==============================================================================
+==================================================================================== 
     PROGRAM: Circle Area Management System
-    DEVELOPER: VEDANT BHATT
+    DEVELOPER: Vedant Bhatt
     ID No: 24CE013
     CREATED ON: April 13, 2025
-==============================================================================
+
+    FEATURES:
+    - Demonstrates use of classes and inheritance in C++
+    - Supports creation and display of circle objects
+    - Calculates area of a circle based on its radius
+    - Supports both static and dynamic allocation for circle objects
+==================================================================================== 
 */
 
 #include <iostream>
@@ -13,46 +19,50 @@ using namespace std;
 class Shape
 {
 protected:
-    double radius;
+    double Radius; 
 
 public:
     // Constructor to initialize radius
-    Shape(double r = 0)
+    Shape(double R = 0)
     {
-        radius = r;
+        Radius = R; 
     }
 
-    // Function to set radius
-    void setRadius(double r)
+    // Function to set the radius of the shape
+    void SetRadius(double R)
     {
-        radius = r;
+        Radius = R; 
     }
 
-    // Function to get radius
-    double getRadius() const
+    // Function to get the radius of the shape
+    double GetRadius() const
     {
-        return radius;
+        return Radius; 
     }
 };
+
+
 
 class Circle : public Shape
 {
 public:
-    // Constructor to initialize radius
-    Circle(double r = 0) : Shape(r) {}
+   
+    Circle(double R = 0) : Shape(R) {}
 
-    // Function to calculate area of the circle
-    double calculateArea() const
+    
+    double CalculateArea() const
     {
-        return (22 / 7) * radius * radius; // Area = πr²
+        return (22 / 7) * Radius * Radius; // Calculate and return area
     }
 
-    // Function to display radius and area
-    void display() const
+    // Function to display the radius and area of the circle
+    void Display() const
     {
-        cout << "Radius: " << radius << ", Area: " << calculateArea() << endl;
+        cout << "Radius: " << Radius << ", Area: " << CalculateArea() << endl;
     }
 };
+
+
 
 int main()
 {
@@ -60,43 +70,43 @@ int main()
     cout << "==================== Static Circle Array ==============" << endl;
 
     // Creating 3 predefined circles with fixed radius
-    Circle circlesStatic[3] = {Circle(2.22), Circle(3.5), Circle(13.0)};
+    Circle CirclesStatic[3] = {Circle(2.22), Circle(3.5), Circle(13.0)};
 
     // Displaying area of each static circle
-    for (int i = 0; i < 3; ++i)
+    for (int I = 0; I < 3; ++I)
     {
-        cout << "Circle " << i + 1 << ": ";
-        circlesStatic[i].display();
+        cout << "Circle " << I + 1 << ": ";
+        CirclesStatic[I].Display();
     }
 
     // Dynamic circle input using static array
     cout << endl
          << "============= Dynamic Number of Circles Using Array =================" << endl;
 
-    int n;
+    int N;
     cout << "Enter number of circles: ";
-    cin >> n;
+    cin >> N; 
 
-    Circle circlesDynamic[n];
+    Circle CirclesDynamic[N]; 
 
-    // Input radius  for each circle
-    for (int i = 0; i < n; ++i)
+    // Input radius for each circle
+    for (int I = 0; I < N; ++I)
     {
-        double r;
-        cout << "Enter radius for circle " << i + 1 << ": ";
-        cin >> r;
-        circlesDynamic[i].setRadius(r); // set radius
+        double R;
+        cout << "Enter radius for circle " << I + 1 << ": ";
+        cin >> R; 
+        CirclesDynamic[I].SetRadius(R); 
     }
 
     // Display details for each circle
-    for (int i = 0; i < n; ++i)
+    for (int I = 0; I < N; ++I)
     {
-        cout << "Circle " << i + 1 << ": ";
-        circlesDynamic[i].display();
+        cout << "Circle " << I + 1 << ": ";
+        CirclesDynamic[I].Display(); 
     }
 
     cout << endl
-         << "VEDANT BHATT || 24CE013" << endl;
+         << "VEDANT BHATT || 24CE013" << endl; 
 
     return 0;
 }
