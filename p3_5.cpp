@@ -4,39 +4,40 @@
 using namespace std;
 
 // Function to calculate the sum of digits of a number
-int sumOfDigits(long long num) {
-    int sum = 0;
-    while (num > 0) {
-        sum += num % 10;
-        num /= 10;
+int SumOfDigits(long long Num) {
+    int Sum = 0;
+    while (Num > 0) {
+        Sum += Num % 10;
+        Num /= 10;
     }
-    return sum;
+    return Sum;
 }
 
 // Recursive function
-int superDigit(long long num) {
-    if (num < 10) {
-        return num;
+int SuperDigit(long long Num) {
+    if (Num < 10) {
+        return Num;
     }
-    int sum = sumOfDigits(num);
-    return superDigit(sum);
+    int Sum = SumOfDigits(Num);
+    return SuperDigit(Sum);
 }
 
 int main() {
-    string n;
-    int k;
-    cin >> n >> k;
+    string N;
+    int K;
+    cout<<"Enter number and value of k:";
+    cin >> N >> K;
 
-    // Calculate the initial sum of digits of n
-    long long initialSum = 0;
-    for (char digit : n) {
-        initialSum += digit - '0';
+    // Calculate the initial sum of digits of N
+    long long InitialSum = 0;
+    for (char Digit : N) {
+        InitialSum += Digit - '0';
     }
 
-    // Multiply the initial sum by k to account for the concatenation
-    long long totalSum = initialSum * k;
+    // Multiply the initial sum by K to account for the concatenation
+    long long TotalSum = InitialSum * K;
 
-    cout << superDigit(totalSum) << endl;
+    cout << SuperDigit(TotalSum) << endl;
 
     return 0;
 }
