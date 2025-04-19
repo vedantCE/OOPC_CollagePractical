@@ -8,7 +8,7 @@
 
     Updates:
     - [13-03-2025] Implemented do-while loop instead of goto for better flow.
-    - [13-03-2025] Implemented const insted of #define for type saftey
+    - [13-03-2025] Implemented const instead of #define for type safety
 =============================================================================
 */
 
@@ -18,7 +18,7 @@
 
 using namespace std;
 
-const int MAX_ACCOUNT = 50; // Maximum number of accounts
+const int MaxAccount = 50; // Maximum number of accounts
 
 // Class to store Bank Account details
 class BankAccount {
@@ -104,9 +104,9 @@ public:
 
 int main() {
     int NoOfAccount = 0; // Total number of accounts created
-    BankAccount account[MAX_ACCOUNT]; // Array to store multiple accounts
+    BankAccount Account[MaxAccount]; // Array to store multiple accounts
     int BankAccountNumber;
-    int choice;
+    int Choice;
 
     do {
         // Display menu options
@@ -117,12 +117,12 @@ int main() {
         cout << "4. Display all account details" << endl;
         cout << "5. Exit" << endl;
         cout << "Enter your choice: ";
-        cin >> choice;
+        cin >> Choice;
 
-        switch (choice) {
+        switch (Choice) {
             case 1:
-                if (NoOfAccount < MAX_ACCOUNT) {
-                    account[NoOfAccount].AddNewAccount();
+                if (NoOfAccount < MaxAccount) {
+                    Account[NoOfAccount].AddNewAccount();
                     NoOfAccount++;
                 } else {
                     cout << "Maximum account limit reached!" << endl;
@@ -133,8 +133,8 @@ int main() {
                 cout << "Enter your Bank Account number: ";
                 cin >> BankAccountNumber;
                 for (int i = 0; i < NoOfAccount; i++) {
-                    if (account[i].SearchAccount(BankAccountNumber)) {
-                        account[i].WithdrawMoney();
+                    if (Account[i].SearchAccount(BankAccountNumber)) {
+                        Account[i].WithdrawMoney();
                         break;
                     }
                 }
@@ -144,8 +144,8 @@ int main() {
                 cout << "Enter your Bank Account number: ";
                 cin >> BankAccountNumber;
                 for (int i = 0; i < NoOfAccount; i++) {
-                    if (account[i].SearchAccount(BankAccountNumber)) {
-                        account[i].DepositMoney();
+                    if (Account[i].SearchAccount(BankAccountNumber)) {
+                        Account[i].DepositMoney();
                         break;
                     }
                 }
@@ -159,7 +159,7 @@ int main() {
                 cout << "==========================================================" << endl;
             
                 for (int i = 0; i < NoOfAccount; i++) {
-                    account[i].DisplayDetail();
+                    Account[i].DisplayDetail();
                 }
                 cout << "--------------------------------------------------------" << endl;
                 break;
@@ -171,7 +171,7 @@ int main() {
             default:
                 cout << "Invalid choice! Please enter a valid option." << endl;
         }
-    } while (choice != 5); // Loop until the user selects Exit (5)
+    } while (Choice != 5); // Loop until the user selects Exit (5)
 
     return 0;
 }
