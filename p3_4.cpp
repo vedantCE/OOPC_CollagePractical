@@ -17,90 +17,90 @@ using namespace std;
 
 // Template to display collection
 template <typename T>
-void displayCollection(T* arr, int size) {
+void DisplayCollection(T* Arr, int Size) {
     cout << "Collection Elements: ";
-    for (int i = 0; i < size; ++i)
-        cout << arr[i] << " ";
+    for (int I = 0; I < Size; ++I)
+        cout << Arr[I] << " ";
     cout << endl;
 }
 
 // Template to reverse collection
 template <typename T>
-void reverseCollection(T* arr, int size) {
-    for (int i = 0; i < size / 2; ++i)
-        swap(arr[i], arr[size - i - 1]);
+void ReverseCollection(T* Arr, int Size) {
+    for (int I = 0; I < Size / 2; ++I)
+        swap(Arr[I], Arr[Size - I - 1]);
 }
 
 // Template to find max value
 template <typename T>
-T findMax(T* arr, int size) {
-    T maxVal = arr[0];
-    for (int i = 1; i < size; ++i) {
-        if (arr[i] > maxVal)
-            maxVal = arr[i];
+T FindMax(T* Arr, int Size) {
+    T MaxVal = Arr[0];
+    for (int I = 1; I < Size; ++I) {
+        if (Arr[I] > MaxVal)
+            MaxVal = Arr[I];
     }
-    return maxVal;
+    return MaxVal;
 }
 
 // Main function to test with different data types
 int main() {
-    int size, choice;
+    int Size, Choice;
     cout << "Choose Data Type:\n1. Integer\n2. Float\n3. Character\nEnter choice: ";
-    cin >> choice;
+    cin >> Choice;
 
     cout << "Enter size of collection: ";
-    cin >> size;
+    cin >> Size;
 
-    if (size <= 0) {
+    if (Size <= 0) {
         cout << "Invalid size!";
         return 1;
     }
 
     cout << "Enter elements:\n";
 
-    switch (choice) {
+    switch (Choice) {
         case 1: {
-            int* intArr = new int[size];
-            for (int i = 0; i < size; ++i)
-                cin >> intArr[i];
+            int* IntArr = new int[Size];
+            for (int I = 0; I < Size; ++I)
+                cin >> IntArr[I];
 
-            displayCollection(intArr, size);
-            cout << "Maximum: " << findMax(intArr, size) << endl;
-            reverseCollection(intArr, size);
+            DisplayCollection(IntArr, Size);
+            cout << "Maximum: " << FindMax(IntArr, Size) << endl;
+            ReverseCollection(IntArr, Size);
             cout << "After Reversing: ";
-            displayCollection(intArr, size);
+            DisplayCollection(IntArr, Size);
 
-            delete[] intArr;
+            delete[] IntArr;
             break;
         }
 
         case 2: {
-            float* floatArr = new float[size];
-            for (int i = 0; i < size; ++i)
-                cin >> floatArr[i];
+            float* FloatArr = new float[Size];
+            for (int I = 0; I < Size; ++I)
+                cin >> FloatArr[I];
 
-            displayCollection(floatArr, size);
-            cout << "Maximum: " << findMax(floatArr, size) << endl;
-            reverseCollection(floatArr, size);
+            DisplayCollection(FloatArr, Size);
+            cout << "Maximum: " << FindMax(FloatArr, Size) << endl;
+            ReverseCollection(FloatArr, Size);
             cout << "After Reversing: ";
-            displayCollection(floatArr, size);
+            DisplayCollection(FloatArr, Size);
 
-            delete[] floatArr;
+            delete[] FloatArr;
             break;
         }
 
         case 3: {
-            char* charArr = new char[size];
-            for (int i = 0; i < size; ++i)
-                cin >> charArr[i];
+            char* CharArr = new char[Size];
+            for (int I = 0; I < Size; ++I)
+                cin >> CharArr[I];
 
-            displayCollection(charArr, size);
-            cout << "Maximum (by ASCII): " << findMax(charArr, size) << endl;
-            reverseCollection(charArr, size);
+            DisplayCollection(CharArr, Size);
+            cout << "Maximum (by ASCII): " << FindMax(CharArr, Size) << endl;
+            ReverseCollection(CharArr, Size);
             cout << "After Reversing: ";
-            displayCollection(charArr, size);
+            DisplayCollection(CharArr, Size);
 
-            delete[] charArr;
+            delete[] CharArr;
             break;
         }
 
