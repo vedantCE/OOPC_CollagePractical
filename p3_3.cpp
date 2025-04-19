@@ -21,162 +21,162 @@ using namespace std;
 
 class BankAccount {
 public:
-    int accountNumber;
-    string accountHolderName;
-    double accountBalance;
-    BankAccount* nextAccount;
+    int AccountNumber;
+    string AccountHolderName;
+    double AccountBalance;
+    BankAccount* NextAccount;
 
-    BankAccount(int accNo, string name, double balance) {
-        accountNumber = accNo;
-        accountHolderName = name;
-        accountBalance = balance;
-        nextAccount = NULL;
+    BankAccount(int AccNo, string Name, double Balance) {
+        AccountNumber = AccNo;
+        AccountHolderName = Name;
+        AccountBalance = Balance;
+        NextAccount = NULL;
     }
 
-    void displayAccount() {
-        cout << left << setw(15) << accountNumber
-             << left << setw(25) << accountHolderName
-             << fixed << setprecision(2) << accountBalance << endl;
+    void DisplayAccount() {
+        cout << left << setw(15) << AccountNumber
+             << left << setw(25) << AccountHolderName
+             << fixed << setprecision(2) << AccountBalance << endl;
     }
 };
 
 class AccountManager {
 private:
-    BankAccount* firstAccount;
-    int totalAccounts;
+    BankAccount* FirstAccount;
+    int TotalAccounts;
 
 public:
     AccountManager() {
-        firstAccount = NULL;
-        totalAccounts = 0;
+        FirstAccount = NULL;
+        TotalAccounts = 0;
     }
 
-    void createNewAccount(int accNo, string name, double balance) {
-        BankAccount* newAccount = new BankAccount(accNo, name, balance);
-        newAccount->nextAccount = firstAccount;
-        firstAccount = newAccount;
-        totalAccounts++;
+    void CreateNewAccount(int AccNo, string Name, double Balance) {
+        BankAccount* NewAccount = new BankAccount(AccNo, Name, Balance);
+        NewAccount->NextAccount = FirstAccount;
+        FirstAccount = NewAccount;
+        TotalAccounts++;
         cout << "Account created successfully\n";
     }
 
-    void showAllAccounts() {
-        if (firstAccount == NULL) {
+    void ShowAllAccounts() {
+        if (FirstAccount == NULL) {
             cout << "No accounts found\n";
             return;
         }
 
-        BankAccount* current = firstAccount;
+        BankAccount* Current = FirstAccount;
         cout << "\nAccount No      Account Holder            Balance\n";
         cout << "------------------------------------------------------\n";
 
-        while (current != NULL) {
-            current->displayAccount();
-            current = current->nextAccount;
+        while (Current != NULL) {
+            Current->DisplayAccount();
+            Current = Current->NextAccount;
         }
     }
 
-    BankAccount* searchAccount(int accNo) {
-        BankAccount* current = firstAccount;
-        while (current != NULL) {
-            if (current->accountNumber == accNo)
-                return current;
-            current = current->nextAccount;
+    BankAccount* SearchAccount(int AccNo) {
+        BankAccount* Current = FirstAccount;
+        while (Current != NULL) {
+            if (Current->AccountNumber == AccNo)
+                return Current;
+            Current = Current->NextAccount;
         }
         return NULL;
     }
 
-    void transferMoney(int senderNo, int receiverNo, double amount) {
-        BankAccount* sender = searchAccount(senderNo);
-        BankAccount* receiver = searchAccount(receiverNo);
+    void TransferMoney(int SenderNo, int ReceiverNo, double Amount) {
+        BankAccount* Sender = SearchAccount(SenderNo);
+        BankAccount* Receiver = SearchAccount(ReceiverNo);
 
-        if (!sender || !receiver) {
+        if (!Sender || !Receiver) {
             cout << "One or both accounts not found\n";
             return;
         }
 
-        if (sender->accountBalance < amount) {
+        if (Sender->AccountBalance < Amount) {
             cout << "Insufficient balance to transfer\n";
             return;
         }
 
-        sender->accountBalance -= amount;
-        receiver->accountBalance += amount;
+        Sender->AccountBalance -= Amount;
+        Receiver->AccountBalance += Amount;
 
         cout << "Transfer successful\n";
     }
 
-    void displayTotalAccounts() {
-        cout << "Total accounts created: " << totalAccounts << endl;
+    void DisplayTotalAccounts() {
+        cout << "Total accounts created: " << TotalAccounts << endl;
     }
 
     ~AccountManager() {
-        BankAccount* current = firstAccount;
-        while (current != nullptr) {
-            BankAccount* next = current->nextAccount;
-            delete current;
-            current = next;
+        BankAccount* Current = FirstAccount;
+        while (Current != nullptr) {
+            BankAccount* Next = Current->NextAccount;
+            delete Current;
+            Current = Next;
         }
     }
 };
 
 int main() {
-    AccountManager bank;
-    int choice;
+    AccountManager Bank;
+    int Choice;
 
-menuLabel:
-    cout <<endl<< "SAHARA Bank Menu"<<endl;
-    cout<<"==============================="<<endl;
-    cout << "1. Create Account"<<endl;
-    cout << "2. Display All Accounts"<<endl;
-    cout << "3. Transfer Funds"<<endl;
-    cout << "4. Show Total Accounts"<<endl;
-    cout << "0. Exit"<<endl;
+MenuLabel:
+    cout << endl << "SAHARA Bank Menu" << endl;
+    cout << "===============================" << endl;
+    cout << "1. Create Account" << endl;
+    cout << "2. Display All Accounts" << endl;
+    cout << "3. Transfer Funds" << endl;
+    cout << "4. Show Total Accounts" << endl;
+    cout << "0. Exit" << endl;
     cout << "Enter your choice: ";
-    cin >> choice;
+    cin >> Choice;
 
-    switch (choice) {
+    switch (Choice) {
         case 1: {
-            int accNo;
-            string name;
-            double balance;
+            int AccNo;
+            string Name;
+            double Balance;
             cout << "Enter Account Number: ";
-            cin >> accNo;
+            cin >> AccNo;
             cout << "Enter Account Holder Name: ";
             cin.ignore();
-            getline(cin, name);
+            getline(cin, Name);
             cout << "Enter Initial Balance: ";
-            cin >> balance;
-            bank.createNewAccount(accNo, name, balance);
+            cin >> Balance;
+            Bank.CreateNewAccount(AccNo, Name, Balance);
             break;
         }
         case 2:
-            bank.showAllAccounts();
+            Bank.ShowAllAccounts();
             break;
 
         case 3: {
-            int senderAccNo, receiverAccNo;
-            double amount;
+            int SenderAccNo, ReceiverAccNo;
+            double Amount;
             cout << "Enter Sender Account Number: ";
-            cin >> senderAccNo;
+            cin >> SenderAccNo;
             cout << "Enter Receiver Account Number: ";
-            cin >> receiverAccNo;
+            cin >> ReceiverAccNo;
             cout << "Enter Amount to Transfer: ";
-            cin >> amount;
-            bank.transferMoney(senderAccNo, receiverAccNo, amount);
+            cin >> Amount;
+            Bank.TransferMoney(SenderAccNo, ReceiverAccNo, Amount);
             break;
         }
 
         case 4:
-            bank.displayTotalAccounts();
+            Bank.DisplayTotalAccounts();
             break;
 
         case 0:
-            cout << "VEDANT BHATT || 24CE013"<<endl<<"Exiting program";
+            cout << "VEDANT BHATT || 24CE013" << endl << "Exiting program";
             return 0;
 
         default:
             cout << "Invalid choice\n";
     }
 
-    goto menuLabel;
+    goto MenuLabel;
 }
