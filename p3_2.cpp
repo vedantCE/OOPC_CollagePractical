@@ -16,50 +16,50 @@
 using namespace std;
 
 // Recursive function to calculate sum of array
-int recursiveSum(int arr[], int n) {
-    if (n == 0)
+int RecursiveSum(int Arr[], int N) {
+    if (N == 0)
         return 0;
-    return arr[n - 1] + recursiveSum(arr, n - 1);
+    return Arr[N - 1] + RecursiveSum(Arr, N - 1);
 }
 
 // Iterative function to calculate sum of array
-int iterativeSum(int arr[], int n) {
-    int sum = 0;
-    for (int i = 0; i < n; i++) {
-        sum += arr[i];
+int IterativeSum(int Arr[], int N) {
+    int Sum = 0;
+    for (int I = 0; I < N; I++) {
+        Sum += Arr[I];
     }
-    return sum;
+    return Sum;
 }
 
 int main() {
-    int n;
+    int N;
 
     // Input array size
     cout << "Enter number of elements in the array: ";
-    cin >> n;
+    cin >> N;
 
     // Dynamically allocate memory for array
-    int* arr = new int[n];
+    int* Arr = new int[N];
 
     // Input array elements
-    cout << "Enter " << n << " elements:" << endl;
-    for (int i = 0; i < n; i++) {
-        cout << "Element " << i + 1 << ": ";
-        cin >> arr[i];
+    cout << "Enter " << N << " elements:" << endl;
+    for (int I = 0; I < N; I++) {
+        cout << "Element " << I + 1 << ": ";
+        cin >> Arr[I];
     }
 
     // Calculate and display sum using recursion
-    int sumRecursive = recursiveSum(arr, n);
-    cout << "\nRecursive Sum: " << sumRecursive << endl;
+    int SumRecursive = RecursiveSum(Arr, N);
+    cout << "\nRecursive Sum: " << SumRecursive << endl;
 
     // Calculate and display sum using iteration
-    int sumIterative = iterativeSum(arr, n);
-    cout << "Iterative Sum: " << sumIterative << endl;
+    int SumIterative = IterativeSum(Arr, N);
+    cout << "Iterative Sum: " << SumIterative << endl;
 
     // Free dynamically allocated memory
-    delete[] arr;
+    delete[] Arr;
 
-    cout<<endl<<"VEDANT BHATT || 24CE013"<<endl;
+    cout << endl << "VEDANT BHATT || 24CE013" << endl;
 
     return 0;
 }
