@@ -14,35 +14,35 @@ using namespace std;
 class BankAccount
 {
 public:
-    string holder_name;
-    int account_number, balance;
+    string HolderName;
+    int AccountNumber, Balance;
 
     // Deposit money function
-    void deposit(int amount)
+    void Deposit(int Amount)
     {
-        if (amount > 0)
+        if (Amount > 0)
         {
-            balance += amount;
+            Balance += Amount;
         }
     }
 
     // Withdraw money function
-    void withdraw(int amount)
+    void Withdraw(int Amount)
     {
-        if (amount > 0 && amount < balance)
+        if (Amount > 0 && Amount < Balance)
         {
-            balance -= amount;
+            Balance -= Amount;
         }
-        else if (amount > balance)
+        else if (Amount > Balance)
         {
             cout << "Not enough balance!" << endl;
         }
     }
 
     // Display current bank balance
-    void display_balance()
+    void DisplayBalance()
     {
-        cout << "Current Balance: " << balance;
+        cout << "Current Balance: " << Balance;
     }
 };
 
@@ -50,16 +50,16 @@ public:
 int main()
 {
     // Declaring first bank account
-    BankAccount b1;
-    b1.balance = 10000;
-    int amount;
-    int choice;
+    BankAccount B1;
+    B1.Balance = 10000;
+    int Amount;
+    int Choice;
 
     // Taking bank account details
     cout << "Enter your name: ";
-    cin >> b1.holder_name;
+    cin >> B1.HolderName;
     cout << "Enter your account number: ";
-    cin >> b1.account_number;
+    cin >> B1.AccountNumber;
 
     cout << "Enter 1 For DEPOSIT" << endl
          << "Enter 2 For WITHDRAW" << endl
@@ -70,22 +70,22 @@ int main()
     {
         cout << endl;
         cout << "Enter your choice: ";
-        cin >> choice;
+        cin >> Choice;
 
-        switch (choice)
+        switch (Choice)
         {
         case 1:
             cout << "Enter amount for Deposit: ";
-            cin >> amount;
-            b1.deposit(amount);
+            cin >> Amount;
+            B1.Deposit(Amount);
             break;
         case 2:
             cout << "Enter amount for Withdraw: ";
-            cin >> amount;
-            b1.withdraw(amount);
+            cin >> Amount;
+            B1.Withdraw(Amount);
             break;
         case 3:
-            b1.display_balance();
+            B1.DisplayBalance();
             break;
         case 4:
             cout << "\nThank you!" << endl;
@@ -93,7 +93,7 @@ int main()
         default:
             cout << "Enter valid choice!" << endl;
         }
-    } while (choice != 4);
+    } while (Choice != 4);
 
     cout << "\nName: Vedant Bhatt" << endl
          << "ID: 24CE013";
