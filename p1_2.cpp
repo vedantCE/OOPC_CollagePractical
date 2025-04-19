@@ -4,7 +4,7 @@
     AIM: To manage a simple product billing system
     DEVELOPER: Vedant Bhatt
     CREATED ON: February 21,2025
-    LAST UPDATED: March 12, 2025
+    LAST UPDATED: April 19, 2025
 ==============================================
 */
 
@@ -16,90 +16,90 @@ using namespace std;
 // Product class to store product details
 class Product
 {
-    int product_id;
-    string product_name;
-    int product_price;
-    int total_price;
-    int quantity;
+    int ProductId;
+    string ProductName;
+    int ProductPrice;
+    int TotalPrice;
+    int Quantity;
 
 public:
     // Function to display product details in bill format
-    void display_detail()
+    void DisplayDetail()
     {
-        cout << left << setw(15) << product_name 
-             << right << setw(10) << product_price 
-             << setw(10) << quantity 
-             << setw(15) << total_price << endl;
+        cout << left << setw(15) << ProductName 
+             << right << setw(10) << ProductPrice 
+             << setw(10) << Quantity 
+             << setw(15) << TotalPrice << endl;
     }
 
     // Function to check if product ID matches
-    int search_product(int id)
+    int SearchProduct(int Id)
     {
-        if (id == product_id)
+        if (Id == ProductId)
             return 1;
         return 0;
     }
 
     // Function to add quantity to an existing product
-    void add_quantity()
+    void AddQuantity()
     {
-        quantity++;
-        total_price = product_price * quantity;
-        cout << "Product ID " << product_id << " found! Added to your basket. New quantity: " 
-             << quantity << "  Total Price: " << total_price << endl;
+        Quantity++;
+        TotalPrice = ProductPrice * Quantity;
+        cout << "Product ID " << ProductId << " found! Added to your basket. New quantity: " 
+             << Quantity << "  Total Price: " << TotalPrice << endl;
     }
 
     // Function to add a new product
-    void add_product(int id)
+    void AddProduct(int Id)
     {
         cout << "New Product Found!!" << endl
              << "Enter product name: ";
-        cin >> product_name;
+        cin >> ProductName;
         cout << "Enter product price: ";
-        cin >> product_price;
-        product_id = id;
-        quantity = 1;
-        total_price = product_price;
+        cin >> ProductPrice;
+        ProductId = Id;
+        Quantity = 1;
+        TotalPrice = ProductPrice;
     }
 
     // Function to get the total price of a product
-    int get_total_price()
+    int GetTotalPrice()
     {
-        return total_price;
+        return TotalPrice;
     }
 };
 
 // Main Function
 int main()
 {
-    Product product_list[50];
-    int num_products = 0, product_id, grand_total = 0;
-    char choice;
+    Product ProductList[50];
+    int NumProducts = 0, ProductId, GrandTotal = 0;
+    char Choice;
 
-menu:
+Menu:
     cout << "Enter product ID: ";
-    cin >> product_id;
+    cin >> ProductId;
 
     // Searching for existing product
-    for (int i = 0; i < num_products; i++)
+    for (int i = 0; i < NumProducts; i++)
     {
-        if (product_list[i].search_product(product_id) == 1)
+        if (ProductList[i].SearchProduct(ProductId) == 1)
         {
-            product_list[i].add_quantity();
-            goto continue_shopping;
+            ProductList[i].AddQuantity();
+            goto ContinueShopping;
         }
     }
 
     // Adding a new product if not found
-    product_list[num_products].add_product(product_id);
-    num_products++;
+    ProductList[NumProducts].AddProduct(ProductId);
+    NumProducts++;
 
-continue_shopping:
+ContinueShopping:
     cout << "If you want to add another item press y else n: ";
-    cin >> choice;
-    if (choice == 'y')
+    cin >> Choice;
+    if (Choice == 'y')
     {
-        goto menu;
+        goto Menu;
     }
     else
     {
@@ -113,14 +113,14 @@ continue_shopping:
              << setw(15) << "Total Price" << endl;
         cout << "---------------------------------------------------" << endl;
 
-        for (int i = 0; i < num_products; i++)
+        for (int i = 0; i < NumProducts; i++)
         {
-            product_list[i].display_detail();
-            grand_total += product_list[i].get_total_price();
+            ProductList[i].DisplayDetail();
+            GrandTotal += ProductList[i].GetTotalPrice();
         }
 
         cout << "---------------------------------------------------" << endl;
-        cout << left << setw(35) << "Grand Total:" << grand_total << endl;
+        cout << left << setw(35) << "Grand Total:" << GrandTotal << endl;
         cout << endl << "          --x-- Thanks For Visiting --x--         " << endl;
         cout << endl << "Vedant Bhatt" << " " << "ID No: 24CE013" << endl;
     }
